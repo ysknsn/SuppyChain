@@ -38,10 +38,18 @@ npm run dev
 
 ### UML
 
+## Activity
+
 ![Activity](uml/activity.png)
+
+## Class
 
 ![Class](uml/class.png)
 
+## Sequence
+
 ![Sequence](uml/sequence.png)
 
-![state](uml/state.png)
+## State
+
+![State](uml/state.png)
