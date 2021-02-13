@@ -1,4 +1,3 @@
-
 - The contract address:0x8D863d7B790d9d8ac0c77f0fC7a1B252895E7ECD
 - Truffle v4.1.14
 - Solidity - 0.4.24 (solc-js)
@@ -6,6 +5,7 @@
 - Web3.js v1.2.9
 
 ### Installing
+
 ```
 npm install
 ```
@@ -35,3 +35,13 @@ truffle test
 ```
 npm run dev
 ```
+
+### UML
+
+![Activity](uml/activity.png)
+
+![Class](uml/class.png)
+
+![Sequence](uml/sequence.png)
+
+![state](uml/state.png)
