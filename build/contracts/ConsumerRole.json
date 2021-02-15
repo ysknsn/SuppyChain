@@ -284,7 +284,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1410,
+                          "referencedDeclaration": 1527,
                           "src": "612:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -392,7 +392,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1410,
+                              "referencedDeclaration": 1527,
                               "src": "762:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -458,10 +458,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1413,
-                        1414
+                        1530,
+                        1531
                       ],
-                      "referencedDeclaration": 1413,
+                      "referencedDeclaration": 1530,
                       "src": "743:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -820,7 +820,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1410,
+                          "referencedDeclaration": 1527,
                           "src": "1225:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1490,7 +1490,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1410,
+                          "referencedDeclaration": 1527,
                           "src": "612:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1598,7 +1598,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1410,
+                              "referencedDeclaration": 1527,
                               "src": "762:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -1664,10 +1664,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1413,
-                        1414
+                        1530,
+                        1531
                       ],
-                      "referencedDeclaration": 1413,
+                      "referencedDeclaration": 1530,
                       "src": "743:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2026,7 +2026,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1410,
+                          "referencedDeclaration": 1527,
                           "src": "1225:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2598,5 +2598,5 @@
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2021-02-15T13:08:22.959Z"
+  "updatedAt": "2021-02-15T15:37:43.357Z"
 }
