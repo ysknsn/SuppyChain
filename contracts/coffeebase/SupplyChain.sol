@@ -165,13 +165,14 @@ contract SupplyChain is
     function harvestItem(
         uint256 _upc,
         address _originFarmerID,
-        string memory _originFarmName,
-        string memory _originFarmInformation,
-        string memory _originFarmLatitude,
-        string memory _originFarmLongitude,
-        string memory _productNotes
+        string _originFarmName,
+        string _originFarmInformation,
+        string _originFarmLatitude,
+        string _originFarmLongitude,
+        string _productNotes
     ) public {
         // Add the new item as part of Harvest
+
         items[_upc].originFarmerID = _originFarmerID;
         items[_upc].originFarmName = _originFarmName;
         items[_upc].originFarmInformation = _originFarmInformation;
@@ -179,7 +180,8 @@ contract SupplyChain is
         items[_upc].originFarmLongitude = _originFarmLongitude;
         items[_upc].productNotes = _productNotes;
         items[_upc].itemState = State.Harvested;
-        items[_upc].ownerID = _originFarmerID;
+        items[_upc].ownerID = msg.sender;
+        items[_upc].productPrice = uint256(0);
 
         // Increment sku
         sku = 1;
@@ -194,11 +196,10 @@ contract SupplyChain is
     // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
     function processItem(uint256 _upc)
         public
-    // Call modifier to check if upc has passed previous supply chain stage
-    // harvested(_upc)
-
-    // Call modifier to verify caller of this function
-    // verifyCaller(items[_upc].ownerID)
+        // Call modifier to check if upc has passed previous supply chain stage
+        harvested(_upc)
+        // Call modifier to verify caller of this function
+        verifyCaller(items[_upc].ownerID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Processed;
@@ -211,10 +212,9 @@ contract SupplyChain is
     function packItem(uint256 _upc)
         public
         // Call modifier to check if upc has passed previous supply chain stage
-        // processed(_upc)
-
+        processed(_upc)
         // Call modifier to verify caller of this function
-        // verifyCaller(items[_upc].ownerID)
+        verifyCaller(items[_upc].ownerID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Packed;
@@ -224,16 +224,16 @@ contract SupplyChain is
     }
 
     // Define a function 'sellItem' that allows a farmer to mark an item 'ForSale'
-    function sellItem(uint256 _upc)
+    function sellItem(uint256 _upc, uint256 _price)
         public
         // Call modifier to check if upc has passed previous supply chain stage
-        // packed(_upc)
-
+        packed(_upc)
         // Call modifier to verify caller of this function
-        // verifyCaller(items[_upc].ownerID)
+        verifyCaller(items[_upc].ownerID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.ForSale;
+        items[_upc].productPrice = _price;
 
         // Emit the appropriate event
         emit ForSale(_upc);
@@ -246,13 +246,11 @@ contract SupplyChain is
         public
         payable
         // Call modifier to check if upc has passed previous supply chain stage
-        // forSale(_upc)
-
+        forSale(_upc)
         // Call modifer to check if buyer has paid enough
-        // paidEnough(items[_upc].productPrice)
-
+        paidEnough(items[_upc].productPrice)
         // Call modifer to send any excess ether back to buyer
-        // checkValue(_upc)
+        checkValue(_upc)
     {
         // Update the appropriate fields - ownerID, distributorID, itemState
         items[_upc].ownerID = msg.sender;
@@ -272,10 +270,9 @@ contract SupplyChain is
     function shipItem(uint256 _upc)
         public
         // Call modifier to check if upc has passed previous supply chain stage
-        // sold(_upc)
-
+        sold(_upc)
         // Call modifier to verify caller of this function
-        // verifyCaller(items[_upc].ownerID)
+        verifyCaller(items[_upc].ownerID)
     {
         // Update the appropriate fields
         items[_upc].itemState = State.Shipped;
@@ -289,10 +286,9 @@ contract SupplyChain is
     function receiveItem(uint256 _upc)
         public
         // Call modifier to check if upc has passed previous supply chain stage
-        // shipped(_upc)
-
+        shipped(_upc)
         // Access Control List enforced by calling Smart Contract / DApp
-        // onlyRetailer()
+        onlyRetailer
     {
         // Update the appropriate fields - ownerID, retailerID, itemState
         items[_upc].ownerID = msg.sender;
@@ -308,10 +304,9 @@ contract SupplyChain is
     function purchaseItem(uint256 _upc)
         public
         // Call modifier to check if upc has passed previous supply chain stage
-        // received(_upc)
-
+        received(_upc)
         // Access Control List enforced by calling Smart Contract / DApp
-        // onlyConsumer()
+        onlyConsumer()
     {
         // Update the appropriate fields - ownerID, consumerID, itemState
         items[_upc].ownerID = msg.sender;
@@ -331,10 +326,10 @@ contract SupplyChain is
             uint256 itemUPC,
             address ownerID,
             address originFarmerID,
-            string memory originFarmName,
-            string memory originFarmInformation,
-            string memory originFarmLatitude,
-            string memory originFarmLongitude
+            string originFarmName,
+            string originFarmInformation,
+            string originFarmLatitude,
+            string originFarmLongitude
         )
     {
         // Assign values to the 8 parameters
@@ -384,6 +379,7 @@ contract SupplyChain is
         distributorID = items[_upc].distributorID;
         retailerID = items[_upc].retailerID;
         consumerID = items[_upc].consumerID;
+        itemState = uint256(items[_upc].itemState);
 
         return (
             itemSKU,
